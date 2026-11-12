@@ -1,53 +1,41 @@
-# Personal portfolio — UZ / RU / ENG
+# Folio — individual portfolio delivery kit
 
-The public homepage opens a single person's portfolio. Visitors can view projects, expand project details, read about the owner, and switch between Uzbek, Russian, and English. Language choices are remembered on the device and can be shared with `?lang=uz`, `?lang=ru`, or `?lang=en`.
+A personal portfolio in Uzbek, Russian, and English, with a separate browser editor, eight faculty themes, and GitHub Pages publishing.
 
-## Change the owner
+Start with [DELIVERY.md](DELIVERY.md) for the complete Uzbek owner and customer delivery guide.
 
-Edit `src/portfolio-content.ts`. This is the source of the published content; browser storage only remembers the visitor's language.
-
-1. Replace `name`, `initials`, `role`, `headline`, `intro`, `location`, and `about`. Each text has three versions, in this order: Uzbek, Russian, English. Translations are entered manually, not generated automatically.
-2. Add your real `email`, skills, experience, and projects. Each project has a description, your contribution, and the outcome. Empty project URLs are hidden.
-3. Put your portrait, project images, and résumé in `public/`. Set `photo: 'portrait.jpg'`, `resume: 'resume.pdf'`, and project `image` paths accordingly. Use relative paths so they work on GitHub Pages.
-4. Choose `field` from the eight options below. Optionally override the accent color, background, and heading font in `appearance`.
-5. Set `demo: false` when all sample content has been replaced. Publishing these changes updates the same website link for everyone.
-
-Fields: `computer-engineering`, `it-business`, `business`, `english-philology`, `korean-philology`, `architecture`, `civil-engineering`, `interior-design`.
-
-The field controls the starting colors, typography, and visual treatment. Changing it does not rewrite the owner's profession or project content. Edit those to match the owner in all three languages.
-
-## Local preview
-
-Requires Node 22.13+.
+## Run
 
 ```sh
 npm ci
-npx vite --config vite.pages.config.ts --host 127.0.0.1
+npm run dev:portfolio
 ```
 
-Open the URL printed by Vite, including `/universal_portfolio/`.
+Public preview: http://127.0.0.1:5173/universal_portfolio/
+Editor: http://127.0.0.1:5173/universal_portfolio/?edit=1
 
-## Verify
+## Content
+
+`public/portfolio.json` is the single published source of owner information. Use the editor to change it, download the JSON, replace that file, then commit and push. Browser drafts never change the live site. The editor has no server write privileges or login.
+
+`src/portfolio-content.ts` contains translated interface labels and faculty themes. `src/personal.css` contains layout and styling. The old studio files are retained for history but are not part of this portfolio's page bundle.
+
+## Validation and production build
 
 ```sh
-npm run build:pages
+npm run test:portfolio
 npx tsc --noEmit
-node --test tests/portfolio-content.test.mjs
+npm run build:pages
 ```
 
-## Publish to GitHub Pages
+The build creates static HTML, metadata, assets, and a 404 page in `pages-dist/`. GitHub Actions runs tests, TypeScript checks, and the build before deployment. Set `REQUIRE_CLIENT_CONTENT=1` to reject incomplete customer profiles. Set `PORTFOLIO_BASE=/` for a root domain, or `/repository-name/` for another GitHub repository.
 
-The existing `.github/workflows/pages.yml` builds and deploys pushes to `main`. Repository Settings → Pages → Source must be GitHub Actions.
-
-After reviewing your changes, run from this folder:
+## Separate customer projects
 
 ```sh
-git add src app index.html README.md tests/portfolio-content.test.mjs
-git commit -m "Simplify portfolio and add Uzbek Russian English"
-git push origin main
+npm run client -- customer-portfolio
 ```
 
-Once the workflow succeeds, the public URL is:
-https://habibnematov3-debug.github.io/universal_portfolio/
+Creates `../clients/customer-portfolio` without Git identity, hosted Site credentials, local storage, or unused studio dependencies. Run `npm install` there to create its lockfile, then use its `npm run dev`. The destination must not exist. Copied public content must be replaced for the new owner.
 
-This version has no owner login or online editor. Editing the source file and publishing it changes the public portfolio. The earlier studio files remain in the repository but are not used by the homepage. The separate older Sites preview is not updated by GitHub Pages deployment.
+Current content is explicitly a sample. No real customer's biography, project achievements, photo, or contact information has been invented.

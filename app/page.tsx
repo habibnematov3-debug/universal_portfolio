@@ -1,2 +1,2 @@
-import PersonalPortfolio from '@/src/components/PersonalPortfolio';
-export default function Home() { return <PersonalPortfolio />; }
+import PortfolioApp from '@/src/components/PortfolioApp';
+export default function Home() { return <PortfolioApp />; }

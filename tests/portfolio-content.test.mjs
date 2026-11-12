@@ -5,7 +5,9 @@ import ts from 'typescript';
 
 const source = await readFile(new URL('../src/portfolio-content.ts', import.meta.url), 'utf8');
 const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } });
-const { portfolio, ui, themes } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
+const { ui, themes } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
+
+const portfolio = JSON.parse(await readFile(new URL('../public/portfolio.json', import.meta.url), 'utf8'));
 
 test('all translated UI and portfolio content includes three nonempty languages', () => {
   let translations = 0;

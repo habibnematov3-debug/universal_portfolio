@@ -7,8 +7,7 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  pages: read
 
 concurrency:
   group: github-pages
@@ -24,6 +23,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: npm run test:portfolio
+      - run: npx tsc --noEmit
       - run: npm run build:pages
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
