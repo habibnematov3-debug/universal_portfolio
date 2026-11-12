@@ -13,6 +13,16 @@ npm run dev
 
 Open the Local URL printed by the server (normally http://localhost:5173).
 
+## GitHub Pages
+
+The same portfolio editor has a static build for GitHub Pages. It deploys from `.github/workflows/pages.yml` on each push to `main` after Pages is configured in the repository's **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+```sh
+npm run build:pages
+```
+
+The published URL is `https://habibnematov3-debug.github.io/universal_portfolio/`. This build keeps data in each visitor's browser. It does not provide accounts, shared student records, or individual public portfolio pages. Use the JSON backup feature before switching browsers or devices; data from the separate private Sites preview does not appear automatically on GitHub Pages.
+
 ## Included
 
 - Landing page, eight faculty templates and illustrative preview portfolios.
