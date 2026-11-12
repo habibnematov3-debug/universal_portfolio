@@ -44,6 +44,10 @@ export default function OwnerEditor({ initial }: { initial: PortfolioData }) {
   function validate() {
     const result = portfolioSchema.safeParse(data);
     if (!result.success) { setStatus(`${w('invalid')}: ${result.error.issues.map(i => i.path.join('.')).join(', ')}`); return null; }
+    if (new Blob([JSON.stringify(result.data, null, 2)]).size > 15000000) {
+      setStatus(['Portfolio 15 MB dan oshdi. Rasmlarni kamaytiring.', 'Портфолио больше 15 МБ. Уменьшите изображения.', 'Portfolio exceeds 15 MB. Reduce the images.'][['uz','ru','en'].indexOf(lang)]);
+      return null;
+    }
     return result.data;
   }
   function save() { const valid = validate(); if (!valid) return; try { localStorage.setItem(draftKey, JSON.stringify(valid)); setSavedData(JSON.stringify(valid)); setStatus(w('saved')); } catch { setStatus('Saqlanmadi / Не сохранено / Not saved — download the file instead.'); } }
