@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../src/personal.css";
 
 export const metadata: Metadata = {
-  title: "Folio — sizning keyingi qadamingiz",
-  description: "Fakultetingizga mos portfolio yarating. Ishlaringiz, tajribangiz va g‘oyalaringiz — bir joyda.",
+  title: "Shaxsiy portfolio",
+  description: "Loyihalar, tajriba va men haqimda. O‘zbekcha, русский, English.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
