@@ -23,6 +23,12 @@ export const themes = {
   'civil-engineering': { accent: '#335d83', paper: '#eef3f6', style: 'technical' },
   'interior-design': { accent: '#777044', paper: '#f5f3e9', style: 'editorial' },
 } as const;
+export const layouts = {
+  showcase: { name: tr('Klassik', 'Классический', 'Showcase'), description: tr('Kirish va ikki ustunli loyihalar.', 'Вступление и проекты в две колонки.', 'An introduction and a two-column project grid.') },
+  editorial: { name: tr('Hikoya', 'История', 'Editorial'), description: tr('Katta sarlavha va keng loyiha tasvirlari.', 'Крупный заголовок и широкие изображения.', 'A bold introduction and wide project imagery.') },
+  compact: { name: tr('Ixcham', 'Компактный', 'Compact'), description: tr('Qisqa tanishtiruv va loyiha ro‘yxati.', 'Краткое вступление и список проектов.', 'A concise introduction and project list.') },
+  gallery: { name: tr('Galereya', 'Галерея', 'Gallery'), description: tr('Rasmlar va vizual ishlar markazda.', 'Акцент на изображениях и визуальных работах.', 'A visual collection with image-led projects.') },
+};
 export const ui = {
   work: tr('Loyihalar', 'Проекты', 'Work'), about: tr('Men haqimda', 'Обо мне', 'About'), contact: tr('Aloqa', 'Контакты', 'Contact'),
   available: tr('Yangi imkoniyatlarga ochiqman', 'Открыт к предложениям', 'Open to opportunities'),
@@ -32,6 +38,9 @@ export const ui = {
   details: tr('Loyiha tafsilotlari', 'Подробнее о проекте', 'Inside the project'),
   contribution: tr('Mening hissam', 'Мой вклад', 'My contribution'), result: tr('Natija va xulosalar', 'Результат и выводы', 'Outcome & learning'),
   visit: tr('Loyihani ochish', 'Открыть проект', 'Visit project'),
+  featured: tr('Tanlangan loyiha', 'Главный проект', 'Featured project'),
+  gallery: tr('Loyiha galereyasi', 'Галерея проекта', 'Project gallery'),
+  close: tr('Yopish', 'Закрыть', 'Close'),
   skills: tr('Ko‘nikmalar', 'Навыки', 'Skills & tools'), journey: tr('Ta’lim va tajriba', 'Образование и опыт', 'Education & experience'),
   together: tr('Birga yaxshi ishlar qilamiz.', 'Давайте создадим что-то вместе.', 'Let’s make something worthwhile.'),
   hello: tr('Bog‘lanish', 'Написать мне', 'Say hello'),
