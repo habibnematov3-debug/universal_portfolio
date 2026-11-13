@@ -46,7 +46,7 @@ function useScrollReveal() {
 }
 
 const languages: Language[] = ['uz', 'ru', 'en'];
-export default function PersonalPortfolio({ data: p = publishedPortfolio, preview = false }: { data?: PortfolioData; preview?: boolean }) {
+export default function PersonalPortfolio({ data: p = publishedPortfolio, preview = false, onEdit }: { data?: PortfolioData; preview?: boolean; onEdit?: () => void }) {
   const [lang, setLang] = useState<Language>(p.defaultLanguage);
   const [viewer, setViewer] = useState<{image:string; caption:string} | null>(null);
   const [activeTag, setActiveTag] = useState<string | null>(null);
@@ -122,7 +122,17 @@ export default function PersonalPortfolio({ data: p = publishedPortfolio, previe
 
   return <div className={`personal theme-${theme.style} layout-${p.appearance.layout}${darkClass}${autoClass}`} style={style} id="top">
     <a className="skip-link" href="#main">{t(ui.skip)}</a>
-    {p.demo && <div className="demo-note">{t(ui.demo)}</div>}
+    {p.demo && (
+      <div className="demo-note">
+        {t(ui.demo)}
+        <button
+          className="demo-edit-link"
+          onClick={onEdit || (() => { const url = new URL(location.href); url.searchParams.set('edit', '1'); location.href = url.href; })}
+        >
+          ✏️ {{ uz: 'Tahrirlash', ru: 'Редактировать', en: 'Edit' }[lang]}
+        </button>
+      </div>
+    )}
     <header className="personal-header">
       <a className="identity" href="#top"><span className="monogram">{p.initials}<i /></span><span>{t(p.name)}</span></a>
       <nav aria-label={t(ui.work)}>{projects.length > 0 && <a href="#work">{t(ui.work)}</a>}<a href="#about">{t(ui.about)}</a><a href="#contact">{t(ui.contact)} ↗</a></nav>
@@ -132,6 +142,13 @@ export default function PersonalPortfolio({ data: p = publishedPortfolio, previe
         <button aria-pressed={themeMode === 'auto'} aria-label="Auto" onClick={() => setThemeMode('auto')}>◐</button>
         <button aria-pressed={themeMode === 'dark'} aria-label="Dark" onClick={() => setThemeMode('dark')}>🌙</button>
       </div>
+      <button
+        className="edit-button"
+        onClick={onEdit || (() => { const url = new URL(location.href); url.searchParams.set('edit', '1'); location.href = url.href; })}
+        title={{ uz: 'Portfolioni tahrirlash', ru: 'Редактировать портфолио', en: 'Edit portfolio' }[lang]}
+      >
+        ✏️ <span className="edit-button-text">{{ uz: 'Tahrirlash', ru: 'Редактировать', en: 'Edit' }[lang]}</span>
+      </button>
     </header>
     <main id="main">
       <section className="personal-hero reveal">

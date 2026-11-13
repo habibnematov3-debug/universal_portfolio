@@ -60,3 +60,9 @@
 /* ===== ENHANCED FOOTER ===== */
 .personal-footer .back-top{display:inline-flex;align-items:center;gap:5px;opacity:.6;transition:opacity .2s}
 .personal-footer .back-top:hover{opacity:1;color:var(--accent)}
+
+/* ===== EDIT BUTTON ===== */
+.edit-button{border:1px solid var(--line);border-radius:30px;padding:6px 14px;background:var(--accent);color:var(--on-accent);font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer;margin-left:8px;transition:opacity .2s,transform .2s;text-decoration:none}
+.edit-button:hover{opacity:.9;transform:translateY(-1px)}
+.demo-edit-link{margin-left:8px;padding:2px 8px;border-radius:12px;background:var(--accent);color:var(--on-accent);font-size:10px;font-weight:700;text-decoration:none;cursor:pointer;border:none}
+@media(max-width:620px){.edit-button-text{display:none}.edit-button{padding:6px 10px;min-width:32px;min-height:32px;justify-content:center}}

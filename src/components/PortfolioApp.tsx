@@ -8,9 +8,22 @@ const OwnerEditor = lazy(() => import('./OwnerEditor'));
 
 export default function PortfolioApp() {
   const [editing, setEditing] = useState(false);
+
   useEffect(() => {
-    setEditing(new URLSearchParams(location.search).get('edit') === '1');
+    const sync = () => {
+      setEditing(new URLSearchParams(location.search).get('edit') === '1');
+    };
+    sync();
+    window.addEventListener('popstate', sync);
+    return () => window.removeEventListener('popstate', sync);
   }, []);
+
+  const handleEdit = () => {
+    const url = new URL(location.href);
+    url.searchParams.set('edit', '1');
+    history.pushState(null, '', url);
+    setEditing(true);
+  };
 
   return (
     <ErrorBoundary>
@@ -19,7 +32,7 @@ export default function PortfolioApp() {
           <OwnerEditor initial={publishedPortfolio} />
         </Suspense>
       ) : (
-        <PersonalPortfolio data={publishedPortfolio} />
+        <PersonalPortfolio data={publishedPortfolio} onEdit={handleEdit} />
       )}
     </ErrorBoundary>
   );
