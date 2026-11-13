@@ -11,9 +11,9 @@ export const projectPrompts = {
   'civil-engineering': [tr('Konstruksiya va ko‘lam', 'Конструкция и масштаб', 'Structure & scope'), tr('Hisoblash usuli', 'Метод расчёта', 'Calculation method'), tr('Tekshiruv va cheklovlar', 'Проверки и ограничения', 'Verification & constraints')],
   'interior-design': [tr('Makon va mijoz vazifasi', 'Пространство и задача клиента', 'Space & client brief'), tr('Material va ranglar', 'Материалы и цвета', 'Materials & palette'), tr('Reja va yoritish', 'Планировка и освещение', 'Layout & lighting')],
 };
-export function createProject(field: PortfolioData['field'], id = crypto.randomUUID()): PortfolioProject {
+export function createProject(field: PortfolioData['field'], id: string = crypto.randomUUID()): PortfolioProject {
   return {id,year:String(new Date().getFullYear()),image:'',url:'',tags:[],title:empty(),category:empty(),summary:empty(),contribution:empty(),result:empty(),visible:true,featured:false,details:projectPrompts[field].map(label => ({label:{...label},value:empty()})),gallery:[]};
 }
-export function duplicateProject(project: PortfolioProject, id = crypto.randomUUID()): PortfolioProject {
+export function duplicateProject(project: PortfolioProject, id: string = crypto.randomUUID()): PortfolioProject {
   return {...structuredClone(project),id,featured:false,visible:false};
 }

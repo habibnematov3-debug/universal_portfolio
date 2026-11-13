@@ -8,7 +8,7 @@ const destination = path.resolve(parent, slug);
 if (path.dirname(destination) !== parent) throw Error('Invalid destination');
 await mkdir(parent, { recursive: true });
 await mkdir(destination); // Fails if already present; never overwrite another client.
-const files = ['src/components/PersonalPortfolio.tsx','src/components/PortfolioApp.tsx','src/components/OwnerEditor.tsx','src/lib/portfolio-model.ts','src/personal.css','src/portfolio-content.ts','src/published-portfolio.ts','src/main-pages.tsx','src/server-render.tsx','public','index.html','vite.pages.config.ts','scripts/build-portfolio.mjs','scripts/check-build.mjs','scripts/create-client.mjs','tests/portfolio-model.test.mjs','tests/portfolio-content.test.mjs','DELIVERY.md','.github/workflows/pages.yml'];
+const files = ['src/components/PersonalPortfolio.tsx','src/components/PortfolioApp.tsx','src/components/OwnerEditor.tsx','src/lib/portfolio-model.ts','src/lib/project-presets.ts','src/personal.css','src/portfolio-content.ts','src/published-portfolio.ts','src/main-pages.tsx','src/server-render.tsx','public','index.html','vite.pages.config.ts','scripts/build-portfolio.mjs','scripts/check-build.mjs','scripts/create-client.mjs','tests/portfolio-model.test.mjs','tests/portfolio-content.test.mjs','DELIVERY.md','.github/workflows/pages.yml'];
 for (const file of files) { const target=path.join(destination,file); await mkdir(path.dirname(target),{recursive:true}); await cp(path.join(source,file),target,{recursive:true}); }
 const configPath = path.join(destination, 'vite.pages.config.ts');
 await writeFile(configPath, (await readFile(configPath,'utf8')).replace(/base: process\.env\.PORTFOLIO_BASE \|\| '[^']*'/, `base: process.env.PORTFOLIO_BASE || '/${slug}/'`));
@@ -20,4 +20,5 @@ await writeFile(path.join(destination,'tsconfig.json'),JSON.stringify({compilerO
 await writeFile(path.join(destination,'.gitignore'), 'node_modules/\npages-dist/\n.portfolio-render/\n.env*\n*.tsbuildinfo\n');
 await writeFile(path.join(destination,'README.md'), `# ${slug}\n\nRead DELIVERY.md. Run npm install once to create package-lock.json, then npm run dev.\n\nRepository name: ${slug}. URL base: /${slug}/. Set PORTFOLIO_BASE=/ for a custom domain.\n\nThis copy contains the current public portfolio and its assets. Replace all previous owner details before publishing. It has no Git history, remote, credentials, or private draft storage.\n`);
 console.log(`Client source created: ${destination}\nNext: npm install, edit public/portfolio.json, then npm run build:pages. Initialize a new Git repository for this client.`);
+
 
