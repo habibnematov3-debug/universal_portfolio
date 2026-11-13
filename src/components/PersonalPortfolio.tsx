@@ -78,8 +78,13 @@ export default function PersonalPortfolio({ data: p = publishedPortfolio, previe
     setMeta('meta[property="og:description"]', 'content', p.intro[lang]);
     setMeta('meta[name="twitter:title"]', 'content', title);
     setMeta('meta[name="twitter:description"]', 'content', p.intro[lang]);
-    let jsonLd = document.getElementById('portfolio-jsonld');
-    if (!jsonLd) { jsonLd = document.createElement('script'); jsonLd.id = 'portfolio-jsonld'; jsonLd.type = 'application/ld+json'; document.head.appendChild(jsonLd); }
+    let jsonLd = document.getElementById('portfolio-jsonld') as HTMLScriptElement | null;
+    if (!jsonLd) {
+      jsonLd = document.createElement('script');
+      jsonLd.id = 'portfolio-jsonld';
+      jsonLd.type = 'application/ld+json';
+      document.head.appendChild(jsonLd);
+    }
     jsonLd.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'ProfilePage', name: title, description: p.intro[lang], mainEntity: { '@type': 'Person', name: p.name[lang], jobTitle: p.role[lang], knowsAbout: p.skills, ...(p.email ? { email: p.email } : {}), address: { '@type': 'PostalAddress', addressLocality: p.location[lang] } } });
   }, [lang, p.name, p.role, p.intro, p.skills, p.email, p.location]);
   // Sync theme-color meta with dark mode
