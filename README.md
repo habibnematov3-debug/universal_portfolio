@@ -16,13 +16,17 @@ Bitta sodda shablondagi ko‘p foydalanuvchili portfolio. Next.js App Router, Ty
 
 ### Email havolasi
 
-**Authentication → Email Templates** dagi **Magic Link** va **Confirm signup** shablonlarining kirish havolasini shunga almashtiring:
+**Dastlabki sinov uchun shablonlarni o‘zgartirish shart emas.** Ilova Supabase standart email havolasidan qaytgan `code` ni ham qabul qiladi. Kirish havolasini aynan so‘ragan brauzer va qurilmada oching: standart havola uchun PKCE tekshiruv ma’lumoti shu brauzer cookie sida saqlanadi.
+
+Supabase standart email xizmati faqat loyiha tashkilotining jamoa a’zolari email manzillariga yuboradi va past yuborish limitiga ega. Sinovda Supabase akkauntingiz emailidan foydalaning. Barcha mijozlarga email yuborish uchun **Authentication → Emails → SMTP Settings** da o‘z SMTP xizmatingizni ulang. [Supabase SMTP cheklovlari](https://supabase.com/docs/guides/auth/auth-smtp).
+
+**SMTP ulangandan keyin**, xohlasangiz **Authentication → Emails → Templates** dagi **Magic link or OTP** va **Confirm sign up** shablonlarining kirish havolasini shunga almashtiring:
 
 ```html
 <a href="{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=email">Portfolioga kirish</a>
 ```
 
-Ilova email uchun `/auth/confirm` manzilini yuboradi. Server tokenni tekshirib, cookie yaratadi va `/edit` ga yo‘naltiradi. Bu havola boshqa brauzerda ochilganda ham ishlaydi. Havolalar bir martalik; muddati o‘tgan bo‘lsa `/login` dan yangisini so‘rang. Supabase standart email xizmati cheklangan: haqiqiy mijozlar uchun **Authentication → SMTP Settings** da o‘zingizning SMTP xizmatingizni ulang. Email yetib kelishi va spam papkasini haqiqiy manzil bilan sinang.
+Ilova email uchun `/auth/confirm` manzilini yuboradi. Server kod yoki token hashni Supabase orqali tekshirib, cookie yaratadi va `/edit` ga yo‘naltiradi. Yuqoridagi maxsus `token_hash` havolasi boshqa brauzerda ochilganda ham ishlaydi. Havolalar bir martalik; muddati o‘tgan bo‘lsa `/login` dan yangisini so‘rang. Email yetib kelishi va spam papkasini haqiqiy manzil bilan sinang.
 
 ### Google OAuth
 

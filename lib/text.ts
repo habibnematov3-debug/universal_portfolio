@@ -50,7 +50,7 @@ export const uz = {
   google: "Google orqali kirish",
   email: "Email",
   send: "Kirish havolasini yuborish",
-  sent: "Havola yuborildi. Emailingizni tekshiring.",
+  sent: "Havola yuborildi. Emaildagi havolani shu brauzer va qurilmada oching.",
   authError: "Kirish amalga oshmadi. Yangi havola so‘rab qayta urinib ko‘ring.",
   networkError: "Ulanishda xato. Qayta urinib ko‘ring.",
   edit: "Tahrirlash",
