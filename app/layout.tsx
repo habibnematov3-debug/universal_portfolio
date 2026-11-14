@@ -1,23 +1,14 @@
 import type { Metadata } from "next";
-import "../src/personal.css";
-
+import "./globals.css";
+import { uz } from "@/lib/text";
 export const metadata: Metadata = {
-  title: "Shaxsiy portfolio",
-  description: "Loyihalar, tajriba va men haqimda. O‘zbekcha, русский, English.",
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-  },
+  title: uz.brand,
+  description: uz.metaDescription,
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="uz">
-      <body className="antialiased">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
