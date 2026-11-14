@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/navigation";
 import { browserClient } from "@/lib/supabase/browser";
 import { usernameSchema } from "@/lib/validation";
-import { claimUsername } from "@/app/actions";
+import { claimUsername } from "@/lib/actions";
 import { uz } from "@/lib/text";
 export default function UsernameForm() {
   const [name, setName] = useState("");
@@ -50,7 +50,7 @@ export default function UsernameForm() {
           if (result.error) setStatus(result.error);
           else {
             router.replace("/edit");
-            router.refresh();
+
           }
         } catch {
           setStatus(uz.networkError);

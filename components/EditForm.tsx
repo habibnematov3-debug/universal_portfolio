@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, type ChangeEvent } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { saveProfile, signOut } from "@/app/actions";
+import { useRouter } from "@/lib/navigation";
+import Link, { publicUrl } from "@/lib/navigation";
+import { saveProfile, signOut } from "@/lib/actions";
 import { browserClient } from "@/lib/supabase/browser";
 import { profileSchema, type ProfileInput, validationMessage } from "@/lib/validation";
 import { uz } from "@/lib/text";
@@ -167,7 +167,7 @@ export default function EditForm({
               if (result.error) setErrors([result.error]);
               else {
                 router.replace("/login");
-                router.refresh();
+    
               }
             } catch {
               setErrors([uz.networkError]);
@@ -187,7 +187,7 @@ export default function EditForm({
             type="button"
             className="secondary"
             onClick={async () => {
-              const url = window.location.origin + "/" + username;
+              const url = publicUrl("/" + username);
               try {
                 await navigator.clipboard.writeText(url);
                 setCopyMessage(uz.copied);
@@ -238,7 +238,7 @@ export default function EditForm({
             else {
               setData(parsed.data);
               setMessage(uz.saved);
-              router.refresh();
+  
             }
           } catch {
             setErrors([uz.networkError]);

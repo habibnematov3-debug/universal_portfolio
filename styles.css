@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@layer base {
+  body {
+    @apply bg-stone-50 text-slate-900 antialiased;
+    font-family: Arial, sans-serif;
+  }
+  button,
+  a,
+  input,
+  textarea {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700;
+  }
+  button {
+    @apply cursor-pointer disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  input,
+  textarea {
+    @apply w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-base;
+  }
+  textarea {
+    @apply min-h-28 resize-y;
+  }
+  label {
+    @apply grid gap-2 text-sm font-medium;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply tracking-tight;
+  }
+}
+@layer components {
+  .shell {
+    @apply mx-auto max-w-5xl px-5 py-8 sm:px-8;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl bg-emerald-800 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-900;
+  }
+  .secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm font-medium hover:bg-stone-100;
+  }
+  .panel {
+    @apply rounded-2xl border border-stone-200 bg-white p-5 sm:p-8;
+  }
+  .section-title {
+    @apply mb-5 text-xl font-semibold;
+  }
+  .error {
+    @apply rounded-xl bg-red-50 px-4 py-3 text-sm text-red-800;
+  }
+  .muted {
+    @apply text-sm leading-6 text-slate-600;
+  }
+}

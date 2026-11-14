@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { browserClient } from "@/lib/supabase/browser";
 import { uz } from "@/lib/text";
+import { publicUrl } from "@/lib/navigation";
 import { z } from "zod";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ export default function LoginForm() {
       if (google) {
         const { error } = await client.auth.signInWithOAuth({
           provider: "google",
-          options: { redirectTo: location.origin + "/auth/callback" },
+          options: { redirectTo: publicUrl("/auth/callback/") },
         });
         if (error) throw error;
       } else {
@@ -28,7 +29,7 @@ export default function LoginForm() {
         }
         const { error } = await client.auth.signInWithOtp({
           email,
-          options: { emailRedirectTo: location.origin + "/auth/confirm" },
+          options: { emailRedirectTo: publicUrl("/auth/confirm/") },
         });
         if (error) throw error;
         setMessage(uz.sent);
