@@ -38,6 +38,9 @@ export const uz = {
   imageRule: "JPG, PNG yoki WebP. Ko‘pi bilan 5 MB.",
   uploadError: "Rasm yuklanmadi. Rasm va ulanishni tekshirib, qayta urinib ko‘ring.",
   uploaded: "Rasm yuklandi. Portfolioga chiqarish uchun saqlang.",
+  importDraft: "Tayyor profil ma’lumotlarini yuklash",
+  draftImported: "Ma’lumotlar kiritildi. Portfolioga chiqarish uchun saqlang.",
+  draftInvalid: "Bu profil faylini o‘qib bo‘lmadi.",
   removeImage: "Rasmni olib tashlash",
   copyManually: "Quyidagi havolani belgilang va nusxalang.",
   publicContacts:

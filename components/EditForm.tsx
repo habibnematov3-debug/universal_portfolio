@@ -182,6 +182,28 @@ export default function EditForm({
       <div className="mb-6 space-y-4">
         <h1 className="text-3xl font-bold">{uz.edit}</h1>
         <p className="muted">/{username}</p>
+        <label className="secondary w-fit cursor-pointer">
+          {uz.importDraft}
+          <input
+            className="sr-only"
+            type="file"
+            accept="application/json,.json"
+            onChange={async (event) => {
+              const file = event.target.files?.[0];
+              event.target.value = "";
+              if (!file) return;
+              try {
+                const parsed = profileSchema.safeParse(JSON.parse(await file.text()));
+                if (!parsed.success) throw new Error("invalid draft");
+                setData(parsed.data);
+                setErrors([]);
+                setMessage(uz.draftImported);
+              } catch {
+                setErrors([uz.draftInvalid]);
+              }
+            }}
+          />
+        </label>
         <div className="flex flex-wrap gap-3">
           <button
             type="button"
