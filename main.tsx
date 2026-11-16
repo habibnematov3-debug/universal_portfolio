@@ -25,7 +25,7 @@ function App() {
     const init = async () => {
       if (path.startsWith("/auth/")) {
         const ok = configured() && await confirmSignIn(new URLSearchParams(location.search), browserClient().auth);
-        location.replace(appPath(ok ? "/" : "/login")); return;
+        location.replace(appPath(ok ? "/edit" : "/login")); return;
       }
       if (!configured()) return;
       const {data} = await browserClient().auth.getUser();
